@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Данные учащихся</title>
+		<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+	</head>
+	<body>
+		<div id="loading"></div>
+		<div class="container" id="main-screen" style="display: none;">
+			<h1>Данные учащихся</h1>
+			<div class="tabs">
+				<button class="tablink" onclick="openTab(event, 'all-students')">Все учащиеся</button>
+				<button class="tablink" onclick="openTab(event, 'by-group')">По группе</button>
+			</div>
+			<div id="all-students" class="tabcontent">
+				<div class="sort-container">
+					<div>
+						<label for="sort-options-all">Сортировать по:</label>
+						<select id="sort-options-all" onchange="handleSortChange('-all', 'table-all')">
+							<option value="none">Выберите</option>
+							<option value="age">Возраст</option>
+							<option value="city">Город</option>
+						</select>
+					</div>
+					<div id="city-options-div-all">
+						<label for="city-options-all">Сортировать по городу:</label>
+						<select id="city-options-all">
+						</select>
+					</div>
+					<div id="age-options-div-all">
+						<label for="age-options-all">Сортировать по возрасту:</label>
+						<select id="age-options-all" onchange="resetTable('table-all')">
+							<option value="over18">Больше 18</option>
+							<option value="under18">Меньше 18</option>
+							<option value="over16">Больше 16</option>
+							<option value="under16">Меньше 16</option>
+						</select>
+					</div>
+					<button class="sort-btn" onclick="sortTable('table-all', 'city-options-all', 'city-options-div-all', 'sort-options-all')">Сортировать</button>
+				</div>
+				<table>
+					<thead>
+						<tr>
+							<th>Группа</th>
+							<th>ФИО</th>
+							<th>Дата рождения</th>
+							<th>Паспортные данные</th>
+							<th>Данные отца</th>
+							<th>Данные матери</th>
+							<th>Домашний телефон</th>
+							<th>Адрес</th>
+							<th>Дополнительно</th>
+							<th>ЧАЭС</th>
+							<th>БРСМ</th>
+						</tr>
+					</thead>
+					<tbody id="table-all"></tbody>
+				</table>
+				<button class="download-btn" onclick="downloadData('table-all')">Скачать данные</button>
+			</div>
+
+			<div id="by-group" class="tabcontent">
+				<div id="group-options-div">
+					<label for="group-options">Выбрать группу:</label>
+					<select id="group-select">
+						<option value="">Группа</option>
+						<option value="ПО-6">ПО-6</option>
+						<option value="ПО-5">ПО-5</option>
+						<option value="РС02-23">РС02-23</option>
+					</select>
+				</div>
+				<div class="sort-container">
+					<div>
+						<label for="sort-options-group">Сортировать по:</label>
+						<select id="sort-options-group" onchange="handleSortChange('-group', 'table-group')">
+							<option value="none">Выберите</option>
+							<option value="age">Возраст</option>
+							<option value="city">Город</option>
+						</select>
+					</div>
+					<div id="city-options-div-group">
+						<label for="city-options-group">Сортировать по городу:</label>
+						<select id="city-options-group">
+						</select>
+					</div>
+					<div id="age-options-div-group">
+						<label for="age-options-group">Сортировать по возрасту:</label>
+						<select id="age-options-group" onchange="resetTable('table-group')">
+							<option value="over18">Больше 18 </option>
+							<option value="under18">Меньше 18 </option>
+							<option value="over16">Больше 16</option>
+							<option value="under16">Меньше 16 </option>
+						</select>
+					</div>
+					<button class="sort-btn" onclick="sortTable('table-group', 'city-options-group', 'city-options-div-group', 'sort-options-group')">Сортировать</button>
+				</div>
+				<table>
+					<thead>
+						<tr>
+							<th>Группа</th>
+							<th>ФИО</th>
+							<th>Дата рождения</th>
+							<th>Паспортные данные</th>
+							<th>Данные отца</th>
+							<th>Данные матери</th>
+							<th>Домашний телефон</th>
+							<th>Адрес</th>
+							<th>Дополнительно</th>
+							<th>ЧАЭС</th>
+							<th>БРСМ</th>
+						</tr>
+					</thead>
+					<tbody id="table-group"></tbody>
+				</table>
+				<button class="download-btn" onclick="downloadData('table-group')">Скачать данные</button>
+			</div>
+		</div>
+		<script src="{{ url_for('static', filename='script.js') }}"></script>
+	</body>
+</html>
