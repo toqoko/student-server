@@ -5,7 +5,6 @@ from docx.enum.text import WD_PARAGRAPH_ALIGNMENT
 from docx.shared import Pt, RGBColor, Inches
 from docx.oxml.ns import qn
 from docx.enum.section import WD_ORIENT
-from datetime import datetime
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -19,7 +18,6 @@ def index():
 
 @app.route('/submit', methods=['POST'])
 def submit_data():
-    print('true')
     json_data = request.json
 
     # Создание нового документа
@@ -100,12 +98,11 @@ def submit_data():
                     font.size = Pt(12)
                     run._element.rPr.rFonts.set(qn('w:eastAsia'), 'Times New Roman')
 
-    # Сохранение документа
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    filename = f'data_{timestamp}.docx'
-    doc.save(filename)
+    filename = f'student-data.docx'
+    file_path = os.path.join(os.getcwd(), filename)
+    doc.save(file_path)
 
-    return send_file(filename, as_attachment=True)
+    return send_file(file_path, as_attachment=True)
 
 if __name__ == '__main__':
     app.run(debug=True)

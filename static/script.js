@@ -374,8 +374,6 @@ function filterGroup() {
     });
 }
 
-filterGroup();
-
 async function downloadData(tableId) {
     const table = document.getElementById(tableId);
     const rows = table.getElementsByTagName('tr');
@@ -413,7 +411,7 @@ async function downloadData(tableId) {
             const url = window.URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = 'data.docx';
+            a.download = 'student-data.docx';
             document.body.appendChild(a);
             a.click();
             a.remove();
