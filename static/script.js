@@ -178,7 +178,8 @@ async function fetchStudentData() {
             }
         }); 
         const data = await response.json();
-        populateTable(data.record.students);
+        const sortedStudents = data.record.students.sort((a, b) => a.fullName.localeCompare(b.fullName));
+        populateTable(sortedStudents);
     } catch (error) {
         console.error('Error fetching student data:', error);
     } finally {
