@@ -216,17 +216,21 @@ function populateGroupTable(filteredStudents) {
         row.appendChild(passportCell);
 
         const fatherCell = document.createElement('td');
-        if (student.fatherFullName != '') {
+        if (['father', 'stepfather'].includes(student.father)) {
             fatherCell.innerHTML = `${student.fatherFullName}<br>${student.fatherJob}, ${student.fatherPosition}<br>${student.fatherPhoneNumber}<br>`;
+        } else if(student.father === 'divorced') {
+            fatherCell.innerHTML = `${student.fatherFullName}<br>${student.fatherJob}, ${student.fatherPosition}<br>${student.fatherPhoneNumber}<br>(Разведен)`;
         } else {
-            fatherCell.innerHTML = 'Умер';
+            fatherCell.innerHTML = 'Умер'
         }
         row.appendChild(fatherCell);
 
         const motherCell = document.createElement('td');
-        if (student.motherFullName != '') {
+        if (['mother', 'stepmother'].includes(student.mother)) {
             motherCell.innerHTML = `${student.motherFullName}<br>${student.motherJob}, ${student.motherPosition}<br>${student.motherPhoneNumber}<br>`;
-        } else {
+        } else if(student.mother === 'divorced') {
+            motherCell.innerHTML = `${student.motherFullName}<br>${student.motherJob}, ${student.motherPosition}<br>${student.motherPhoneNumber}<br>(Разведена)`;
+        }else {
             motherCell.innerHTML = 'Умерла';
         }
         row.appendChild(motherCell);
@@ -252,11 +256,11 @@ function populateGroupTable(filteredStudents) {
         row.appendChild(additionalCell);
 
         const chernobylCell = document.createElement('td');
-        chernobylCell.textContent = student.chernobyl ? 'Да' : 'Нет';
+        chernobylCell.textContent = student.chernobyl;
         row.appendChild(chernobylCell);
 
         const brsmCell = document.createElement('td');
-        brsmCell.textContent = student.brsm ? 'Да' : 'Нет';
+        brsmCell.textContent = student.brsm;
         row.appendChild(brsmCell);
         
         tableBodyGroup.appendChild(row);
@@ -282,33 +286,37 @@ function populateTable(students) {
         const row = document.createElement('tr');
 
         const groupNameCell = document.createElement('td');
-        groupNameCell.textContent = student.groupName.trim();
+        groupNameCell.textContent = student.groupName;
         row.appendChild(groupNameCell);
 
         const fullNameCell = document.createElement('td');
-        fullNameCell.innerHTML = `${student.firstName} ${student.fullName} ${student.surname}<br>${student.phoneNumber}<br>`.trim();
+        fullNameCell.innerHTML = `${student.firstName} ${student.fullName} ${student.surname}<br>${student.phoneNumber}<br>`;
         row.appendChild(fullNameCell);
 
         const birthDateCell = document.createElement('td');
-        birthDateCell.textContent = `${student.day}.${student.month}.${student.year}`.trim();
+        birthDateCell.textContent = `${student.day}.${student.month}.${student.year}`;
         row.appendChild(birthDateCell);
 
         const passportCell = document.createElement('td');
-        passportCell.innerHTML = `${student.passportSerialNumber}<br>${student.passportIssuedDate}<br>${student.passportIssuedAuthority}<br>${student.passportIDNumber}<br>`.trim();
+        passportCell.innerHTML = `${student.passportSerialNumber}<br>${student.passportIssuedDate}<br>${student.passportIssuedAuthority}<br>${student.passportIDNumber}<br>`;
         row.appendChild(passportCell);
 
         const fatherCell = document.createElement('td');
-        if (student.fatherFullName != '') {
-            fatherCell.innerHTML = `${student.fatherFullName}<br>${student.fatherJob}, ${student.fatherPosition}<br>${student.fatherPhoneNumber}<br>`.trim();
+        if (['father', 'stepfather'].includes(student.father)) {
+            fatherCell.innerHTML = `${student.fatherFullName}<br>${student.fatherJob}, ${student.fatherPosition}<br>${student.fatherPhoneNumber}<br>`;
+        } else if(student.father === 'divorced') {
+            fatherCell.innerHTML = `${student.fatherFullName}<br>${student.fatherJob}, ${student.fatherPosition}<br>${student.fatherPhoneNumber}<br>(Разведен)`;
         } else {
-            fatherCell.innerHTML = 'Умер';
+            fatherCell.innerHTML = 'Умер'
         }
         row.appendChild(fatherCell);
 
         const motherCell = document.createElement('td');
-        if (student.motherFullName != '') {
-            motherCell.innerHTML = `${student.motherFullName}<br>${student.motherJob}, ${student.motherPosition}<br>${student.motherPhoneNumber}<br>`.trim();
-        } else {
+        if (['mother', 'stepmother'].includes(student.mother)) {
+            motherCell.innerHTML = `${student.motherFullName}<br>${student.motherJob}, ${student.motherPosition}<br>${student.motherPhoneNumber}<br>`;
+        } else if(student.mother === 'divorced') {
+            motherCell.innerHTML = `${student.motherFullName}<br>${student.motherJob}, ${student.motherPosition}<br>${student.motherPhoneNumber}<br>(Разведена)`;
+        }else {
             motherCell.innerHTML = 'Умерла';
         }
         row.appendChild(motherCell);
@@ -318,7 +326,7 @@ function populateTable(students) {
         row.appendChild(homePhoneCell);
 
         const addressCell = document.createElement('td');
-        addressCell.innerHTML = `${student.region},<br>${student.city},<br>${student.street},<br>${student.house},<br>${student.zipCode}<br>`.trim();
+        addressCell.innerHTML = `${student.region},<br>${student.city},<br>${student.street},<br>${student.house},<br>${student.zipCode}<br>`;
         row.appendChild(addressCell);
 
         const additionalCell = document.createElement('td');
@@ -334,11 +342,11 @@ function populateTable(students) {
         row.appendChild(additionalCell);
 
         const chernobylCell = document.createElement('td');
-        chernobylCell.textContent = student.chernobyl ? 'Да' : 'Нет';
+        chernobylCell.textContent = student.chernobyl;
         row.appendChild(chernobylCell);
 
         const brsmCell = document.createElement('td');
-        brsmCell.textContent = student.brsm ? 'Да' : 'Нет';
+        brsmCell.textContent = student.brsm;
         row.appendChild(brsmCell);
         
         tableBodyAll.appendChild(row);
